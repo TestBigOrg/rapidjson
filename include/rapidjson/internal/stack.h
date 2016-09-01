@@ -114,7 +114,7 @@ public:
     template<typename T>
     RAPIDJSON_FORCEINLINE void Reserve(size_t count = 1) {
          // Expand the stack if needed
-        if (RAPIDJSON_UNLIKELY(stackTop_ + sizeof(T) * count > stackEnd_))
+        if (RAPIDJSON_UNLIKELY(!stackTop_ || (stackTop_ + sizeof(T) * count > stackEnd_)))
             Expand<T>(count);
     }
 
